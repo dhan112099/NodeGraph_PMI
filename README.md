@@ -7,16 +7,16 @@ Nuget Release : [![NuGet Release](https://img.shields.io/nuget/v/Lifeisforu.Node
 
 WPF control librarty for node graph.
 
-This library is inspired by a BlueprintEditor of UnrealEngine4. Below image shows a snapshot of a sample using this library. It makes two integers as array, and print values in top-left corner of screen during loop.
+This library is inspired by a BlueprintEditor of UnrealEngine4. The image below shows a snapshot of a sample using this library. It makes two integers as an array, and print values in top-left corner of the screen during the loop.
 
 ![](https://github.com/lifeisforu/NodeGraph/raw/master/Documents/Images/NodeGraphCalculatorExample.png)
 
-A node can be divided as 3 parts, shown in below image; Node itself, FlowPorts, PropertyPorts.
+A node can be divided as 3 parts, as shown in the image below; Node itself, FlowPorts, PropertyPorts.
 
 ![](https://github.com/lifeisforu/NodeGraph/raw/master/Documents/Images/NodeParts.png)
 
-* A FlowPort is used for specifying a execution flow between two nodes. The connection can be made for a FlowPort with different direction. For example, an input FlowPort can be connected with an output FlowPort.
-* A PropertyPort is used for specifying data-transfer between two nodes. The connection can be made for a PropertyPort with differenct direction. For example, an input PropertyPort can be connected with an output PropertyPort.
+* A FlowPort is used for specifying an execution flow between two nodes. The connection can be made for a FlowPort with different direction. For example, an input FlowPort can be connected with an output FlowPort.
+* A PropertyPort is used for specifying data-transfer between two nodes. The connection can be made for a PropertyPort with different directions. For example, an input PropertyPort can be connected with an output PropertyPort.
 
 ## Features
 
@@ -43,7 +43,7 @@ First, in solution explorer, open context menu and select "Manage Nuget Packages
 
 ![](https://github.com/lifeisforu/NodeGraph/raw/master/Documents/Images/ManageNodeGraph.png)
 
-And, in filter text box, search "nodegraph" and press a "Install" button.
+Then, in filter text box, search "nodegraph" and press the "Install" button.
 
 ![](https://github.com/lifeisforu/NodeGraph/raw/master/Documents/Images/InstallNodeGraph.png)
 
@@ -97,11 +97,11 @@ If you don't need special ViewModel or View, you can create node with basic appe
 
 ## Creating FlowChartView
 
-Creating FlowChartView is start by adding NodeGraph.dll assembly as your project's reference. If you already downloaded it with Nuget Manager, it is not needed( Notice : Don't forget add "PropertyTools.Wpf" ).
+Creating FlowChartView is start by adding NodeGraph.dll assembly as your project's reference. If you already downloaded it with Nuget Manager, it is not needed( Note : Don't forget add "PropertyTools.Wpf" ).
 
 ![](https://github.com/lifeisforu/NodeGraph/raw/master/Documents/Images/NodeGraph_Reference.png)
 
-Then, you can add a namespace in XAML of a Visual element. As you can see above, Model, View, ViewModel namespaces exsit. So you should add namespace for View. In my case, I have added name of "ngv". And then you can add "FlowChartView".
+Then, you can add a namespace in XAML of a Visual element. As you can see above, Model, View, ViewModel namespaces exist already. So you should add namespace for View. In my case, I have added name of "ngv". And then you can add "FlowChartView".
 
 "NodeGraphSamples/MainWindow.xaml"
 ```cs
@@ -123,7 +123,7 @@ Then, you can add a namespace in XAML of a Visual element. As you can see above,
 
 ## Creating and binding FlowChart
 
-All Model instances in NodeGrpah could be created only by NodeGraphManager.
+All Model instances in NodeGraph can only be created by NodeGraphManager.
 
 ```cs
 "NodeGraphSamples/MainWindow.xaml.cs"
@@ -149,7 +149,7 @@ private void MainWindow_Loaded( object sender, RoutedEventArgs e )
 }
 ```
 
-If you create FlowChart instance, FlowChartViewModel is created automatically with it. So you can bind it.
+If you create a FlowChart instance, FlowChartViewModel is created automatically with it. So you can bind it.
 
 NodeGraphManager.CreateFlowChart() is defined as below.
 
@@ -167,7 +167,7 @@ NodeGraphManager.CreateFlowChart() is defined as below.
 public static FlowChart CreateFlowChart( bool isDeserializing, Guid guid, Type flowChartModelType )<
 ```
 
-About all other parameters, I'll explain them later in other articles. Let's look third parameter. It specifices type of FlowChart. It is important, becuase it's attribute determines ViewModel of FlowChart.
+About all other parameters, I'll explain them later in other articles. Let's look the third parameter. It specifies type FlowChart. It is important, becuase its attributes determines ViewModel of FlowChart.
 
 For example, a basic FlowChart class is defined as below.
 
@@ -207,7 +207,7 @@ By now, you can see an empty FlowChartView.
 
 ## Creating Node
 
-Now, let's create nodes. By now, we don't have UI which could create nodes. So, we will create node with ContextMenu.
+Now, let's create nodes. Right now, we don't have the UI which can create nodes. So, we will create a node with ContextMenu.
 
 First, add ContextMenu-related event handlers to MainWindow.
 
@@ -227,7 +227,7 @@ private void MainWindow_Loaded( object sender, RoutedEventArgs e )
 }
 ```
 
-Then, when NodeGraphManager_BuildFlowChartContextMenu event invoked, add menu items to ContextMenu.
+Then, when the NodeGraphManager_BuildFlowChartContextMenu event is invoked, add menu items to ContextMenu.
 
 ```cs
 "NodeGraphSamples/MainWindow.xaml.cs"
@@ -269,13 +269,13 @@ private bool NodeGraphManager_BuildFlowChartContextMenu( object sender, BuildCon
 }
 ```
 
-In above code snippets, types in _NodeTypes are pre-defined nodes I have been created. The mechanism is simple. While iterating _NodeTypes, get NodeAttribute attribute from each type. NodeAttribute contains appearances info of the node, among them, select "Header" field and set it as Header of MenuItem. And pass node's type to CommandParameter. It is to create a node with the type, when we click the menu item. _ContextMenuLocation is used for position of the node that will be created.
+In above code snippets, types in _NodeTypes are pre-defined nodes that I have created. The mechanism is simple. While iterating _NodeTypes, get NodeAttribute attribute from each type. NodeAttribute contains appearances info of the node, among them, select "Header" field and set it as Header of MenuItem. And pass node's type to CommandParameter. It is to create a node with the type, when we click the menu item. _ContextMenuLocation is used for position of the node that will be created.
 
 Now, you can see ContextMenu when you click mouse right button.
 
 ![](https://github.com/lifeisforu/NodeGraph/raw/master/Documents/Images/FlowChart_ContextMenu_Open.png)
 
-What will happen, if you click "Create AutoOutputFlow" item. Let's find out.
+What will happen if you click "Create AutoOutputFlow" item? Let's find out.
 
 ```cs
 "NodeGraphSamples/MainWindow.xaml.cs"
@@ -325,7 +325,7 @@ public static Node CreateNode( bool isDeserializing, Guid guid, FlowChart flowCh
     Type propertyPortViewModelTypeOverride = null )
 ```
 
-In this method, it has not only Node type but also XXXOverride types. Becuase I predict that, in the case of Node, ViewModel of Nodes are frequently replaced with other type of ViewModel, so I make additional ViewModel types. About the exmaple of this case, I will explain it later in other articles.
+This method not only has Node type but also XXXOverride types. This is because I predicted that, in the case of a Node, ViewModel of Nodes are frequently replaced with other type of ViewModels, so I made additional types ViewModels. About the example of this case, I will explain later in other articles.
 
 In above code snippets, to determine node's lcoation, you can see that I used a MatrixInv. Becuase mouse position is in ViewSpace, we must transform it to model space. These codes are a bit messy, in later, I have a plan to add some method like NodeGraphManager.CreateNodeViewSpace().
 
@@ -430,11 +430,11 @@ public class NodePortAttribute : Attribute
 
 ## Creating PropertyPort
 
-Now, Let's create a node with PropertyPort. If you click "Create AutoNodeProperty", below node will be created.
+Now, Let's create a node with PropertyPort. If you click "Create AutoNodeProperty", a node like below will be created.
 
 ![](https://github.com/lifeisforu/NodeGraph/raw/master/Documents/Images/AutoNodeProperty.png)
 
-As you can expect, this is acheived by adding simple attribute.
+As you can expect, this is acheived by adding a simple attribute.
 
 ```cs
 "NodeGraphSamples/Model/AutoNodeProperty.cs"
